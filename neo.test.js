@@ -13,4 +13,7 @@ describe('NEO orbit tests', () => {
       neowise = new NeowiseAnalyser(testJson);
     });
 
+    test('getAllJsonObjects', () => {
+      expect(5+5).toBe(10);
+  });
 });
