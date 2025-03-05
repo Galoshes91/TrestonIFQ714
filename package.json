@@ -3,12 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "main": "neo.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "test": "jest"
   },
+  "jest": {
+    "transform": {
+      "^.+\\.(js|ts)$": "babel-jest"
+    },
+    "transformIgnorePatterns": []
+  },
   "private": true,
   "devDependencies": {
+    "@babel/core": "^7.26.9",
+    "@babel/preset-env": "^7.26.9",
+    "babel-jest": "^29.7.0",
     "jest": "^29.7.0"
   },
   "dependencies": {
