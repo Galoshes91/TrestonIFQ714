@@ -3,8 +3,10 @@ const data = fs.readFileSync('./NEOWISE_Dataset.json', 'utf8');
 const jsonData = JSON.parse(data);
 
 //printNeo(getJsonProperty("orbit_class", "Aten"));
-const x = getNeoByDates('2015-01-01', '2015-12-31');
-printArrayToJson(x, 'dates');
+//const x = getNeoByDates('2015-01-01', '2015-12-31');
+//printArrayToJson(x, 'dates');
+
+printNeoByOrbitClass();
 
 /**
  * Gets ALL json data.
@@ -48,6 +50,26 @@ function getNeoByOrbitClass(value) {
     return getJsonProperty("orbit_class", value);
 }
 
+function printNeoByOrbitClass() {
+    let arrObj = {};
+    const uniqueValues = [];
+    jsonData.forEach((element) => {
+        if(!uniqueValues.includes(element['orbit_class'])) {
+            uniqueValues.push(element['orbit_class']);
+        }
+    });
+
+    uniqueValues.forEach((uv) => {
+        arrObj[uv] = jsonData.filter((e) => {
+            return e['orbit_class'] === uv;
+        });
+    });
+
+    console.info("Printing to json file...");
+    const fileName = printArrayToJson(arrObj, 'orbit_class');
+    console.info(`...Done! Printed to ${fileName}`);
+}
+
 /**
  * Retrieves ALL NEOs with the PHA of the given value (true or false)
  */
@@ -74,5 +96,7 @@ function printNeo(objectArr) {
 }
 
 function printArrayToJson(arr, fileName) {
-    fs.writeFileSync(`./NEO_${fileName}_output.json`, JSON.stringify(arr));
+    const fileStr = `./NEO_${fileName}_output.json`;
+    fs.writeFileSync(fileStr, JSON.stringify(arr));
+    return fileStr;
 }

@@ -1,5 +1,8 @@
 const {describe, expect, it} = require('@jest/globals');
+const { getJsonProperty, getAllJsonObjects } = require('./neo.js');
 
-it('eg text', () => {
-    expect(5+5).toBe(10);
+describe("Neo.js tests", () => {
+    it('eg text', () => {
+        expect(getAllJsonObjects()).toBe({})
+    });
 });
