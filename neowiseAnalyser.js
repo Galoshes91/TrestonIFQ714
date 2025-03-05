@@ -6,6 +6,7 @@ export class NeowiseAnalyser {
     constructor(jsonData) {
         this.jsonData = jsonData;
     }
+
     /**
      *
      * Gets ALL json data.
