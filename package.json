@@ -9,5 +9,8 @@
   "private": true,
   "devDependencies": {
     "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "@jest/globals": "^29.7.0"
   }
 }

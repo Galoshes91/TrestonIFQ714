@@ -2,7 +2,9 @@ const fs = require('fs');
 const data = fs.readFileSync('./NEOWISE_Dataset.json', 'utf8');
 const jsonData = JSON.parse(data);
 
-printNeo(getJsonProperty("orbit_class", "Aten"));
+//printNeo(getJsonProperty("orbit_class", "Aten"));
+const x = getNeoByDates('2015-01-01', '2015-12-31');
+printArrayToJson(x, 'dates');
 
 /**
  * Gets ALL json data.
@@ -54,9 +56,23 @@ function getNeoByPha(value) {
 }
 
 /**
+ * Gets all NEOs with discovery dates in between the given min and max dates, inclusive
+ */
+function getNeoByDates(minDate, maxDate) {
+    return jsonData.filter((element) => {
+        const elementDate = Date.parse(element['discovery_date']);
+        return elementDate >= Date.parse(minDate) && elementDate <= Date.parse(maxDate);
+    });
+}
+
+/**
  * Helper function that prints the given object array to the screen
  * in a readable table format
  */
 function printNeo(objectArr) {
     console.table(objectArr);
+}
+
+function printArrayToJson(arr, fileName) {
+    fs.writeFileSync(`./NEO_${fileName}_output.json`, JSON.stringify(arr));
 }
